@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Ignore Search Example - disabled</title>
+</head>
+<body>
+	<script>
+		navigator.serviceWorker.register('/sw.js')
+		.then(function(reg) {
+			for (var i = 1; i <= 200; i++) {
+				fetch(`http://placehold.it/${i}x${i}?forceCaching=true`)
+				.then(function(response) {
+					return response.blob()
+				})
+				.then(function(blob) {
+					var image = new Image()
+					image.src = URL.createObjectURL(blob)
+					document.body.appendChild(image)
+				})
+			}
+		})
+	</script>
+</body>
+</html>
